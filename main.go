@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"myTest/demo_home/github_actions_demo/service"
+	service "github.com/ziyifast/yi-github-actions/service"
 )
 
 func main() {

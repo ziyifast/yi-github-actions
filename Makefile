@@ -1,7 +1,7 @@
 PROJECT_NAME := "github.com/ziyifast/yi-github-actions"
 PKG := "$(PROJECT_NAME)"
-PKG_LIST := $(shell go list ${PKG}/... | grep -v /vendor/)
-GO_FILES := $(shell find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)
+PKG_LIST := $(shell go list ${PKG}/...)
+GO_FILES := $(shell find . -name '*.go' | grep -v _test.go)
 
 .PHONY: all dep lint vet test test-coverage build clean
 
@@ -11,6 +11,7 @@ dep: ## Get the dependencies
 	@go mod download
 
 lint: ## Lint Golang files
+	@go install golang.org/x/lint/golint@latest
 	@golint -set_exit_status ${PKG_LIST}
 
 vet: ## Run go vet
@@ -24,6 +25,7 @@ test-coverage: ## Run tests with coverage
 	@cat cover.out >> coverage.txt
 
 build: dep ## Build the binary file
+	@go get $(PROJECT_NAME)
 	@go build -i -o build/main $(PKG)
 
 clean: ## Remove previous build
