@@ -1,11 +1,14 @@
 PROJECT_NAME := "github.com/ziyifast/yi-github-actions"
 PKG := "$(PROJECT_NAME)"
-PKG_LIST := $(shell go list ${PKG}/... | grep -v /vendor/)
-GO_FILES := $(shell find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)
+PKG_LIST := $(shell go list ${PKG}/...)
+GO_FILES := $(shell find . -name '*.go' | grep -v _test.go)
 
 .PHONY: all dep lint vet test test-coverage build clean
 
 all: build
+
+echo:
+	@echo "$(PKG_LIST)"
 
 dep: ## Get the dependencies
 	@go mod download

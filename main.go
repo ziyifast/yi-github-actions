@@ -6,5 +6,6 @@ import (
 )
 
 func main() {
+	fmt.Println("before...x")
 	fmt.Println("got a user: ", service.UserService.GetUserName())
 }
